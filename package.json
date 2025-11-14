@@ -1,0 +1,29 @@
+{
+  "devDependencies": {
+    "@prettier/plugin-php": "^0.24.0",
+    "prettier": "^3.6.2"
+  },
+  "name": "newsistemdispo",
+  "version": "1.0.0",
+  "description": "tes",
+  "main": "index.js",
+  "dependencies": {
+    "linguist-languages": "^8.2.0",
+    "php-parser": "^3.2.5"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sigit1234-hub/sisitemEdokumen.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/sigit1234-hub/sisitemEdokumen/issues"
+  },
+  "homepage": "https://github.com/sigit1234-hub/sisitemEdokumen#readme"
+}

@@ -1,0 +1,213 @@
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+div th,
+td {
+	border: 1px solid #000;
+	padding: 5px;
+}
+
+body {
+	font-family: Arial, sans-serif;
+	line-height: 1.6;
+	margin: 0;
+	padding: 0;
+	background-color: #f4f4f4;
+	/* Warna latar belakang halaman */
+	display: flex;
+	justify-content: center;
+}
+
+.container {
+	background-color: white;
+	padding: 2.5cm 2cm;
+	/* Margin yang sesuai untuk dokumen */
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	font-family: Arial, sans-serif;
+}
+
+/* --- Header Section --- */
+header {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	margin-bottom: 30px;
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 15px;
+}
+
+.header-left {
+	flex: 0 0 100px;
+	/* Ukuran untuk logo */
+	padding-top: 5px;
+}
+
+.logo {
+	font-size: 60px;
+	font-weight: bold;
+	color: #003366;
+	/* Warna khas BRI (biru tua) */
+	border: 3px solid #003366;
+	padding: 5px 10px;
+	height: 60px;
+	line-height: 0.9;
+	letter-spacing: -5px;
+	text-align: center;
+}
+
+.header-center {
+	flex-grow: 1;
+	text-align: center;
+	line-height: 1.2;
+}
+
+.header-center h1 {
+	font-size: 16px;
+	margin-bottom: 5px;
+	color: #000;
+}
+
+.address-info {
+	font-size: 10px;
+	line-height: 1.4;
+	color: #555;
+	margin-top: 5px;
+}
+
+.address-info a {
+	color: #003366;
+	text-decoration: none;
+}
+
+.header-right {
+	flex: 0 0 120px;
+	text-align: right;
+}
+
+.model-s4 {
+	font-size: 10px;
+	margin: 0 0 10px 0;
+}
+
+/* --- Main Content Section --- */
+.nota-dinas {
+	text-align: center;
+	font-size: 18px;
+	text-decoration: underline;
+	margin: 40px 0;
+}
+
+.metadata {
+	margin-left: 20px;
+	margin-bottom: 30px;
+	font-size: 12px;
+}
+
+.meta-row {
+	display: flex;
+	margin-bottom: 5px;
+}
+
+.meta-label {
+	flex: 0 0 90px;
+	/* Lebar tetap untuk label */
+	font-weight: normal;
+}
+
+.meta-separator {
+	flex: 0 0 10px;
+}
+
+.meta-content {
+	flex-grow: 1;
+}
+
+.content-body p {
+	font-size: 12px;
+	text-align: justify;
+	margin-bottom: 15px;
+}
+
+.content-body p strong {
+	font-weight: bold;
+}
+
+/* --- Table Section --- */
+.device-table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 15px;
+	margin-bottom: 20px;
+	font-size: 12px;
+}
+
+.device-table th,
+.device-table td {
+	border: 1px solid #000;
+	padding: 5px;
+	text-align: left;
+	vertical-align: top;
+}
+
+.device-table th {
+	background-color: #eee;
+	font-weight: bold;
+	text-align: center;
+}
+
+/* Penyesuaian lebar kolom spesifik */
+.device-table td:nth-child(1) {
+	width: 5%;
+	text-align: center;
+}
+
+/* No */
+.device-table td:nth-child(2) {
+	width: 25%;
+}
+
+/* Diperuntukkan untuk */
+.device-table td:nth-child(3) {
+	width: 30%;
+}
+
+/* PN / Jabatan */
+.device-table td:nth-child(4) {
+	width: 10%;
+	text-align: center;
+}
+
+/* Perangkat */
+.device-table td:nth-child(5) {
+	width: 25%;
+}
+
+/* Spesifikasi */
+.device-table td:nth-child(6) {
+	width: 5%;
+	text-align: center;
+}
+
+/* Jumlah */
+
+.device-table ul {
+	list-style-type: disc;
+	padding-left: 15px;
+	margin: 0;
+}
+
+.device-table li {
+	margin-bottom: 3px;
+}
+
+/* --- Closing Section --- */
+.closing-paragraph {
+	font-size: 12px;
+	margin-bottom: 10px;
+}
+
+.closing-paragraph strong {
+	font-weight: bold;
+}

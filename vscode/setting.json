@@ -1,0 +1,63 @@
+{
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"[php]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"editor.formatOnSave": true,
+
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"[php]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode",
+		"editor.formatOnSave": true
+	},
+
+	"intelephense.environment.includePaths": ["application", "system", "app"],
+	"intelephense.files.associations": ["*.php", "*.module"],
+
+	"intelephense.stubs": [
+		"apache",
+		"bcmath",
+		"bz2",
+		"calendar",
+		"curl",
+		"date",
+		"dom",
+		"fileinfo",
+		"filter",
+		"ftp",
+		"gd",
+		"gettext",
+		"hash",
+		"json",
+		"libxml",
+		"mbstring",
+		"mysqli",
+		"openssl",
+		"pcre",
+		"pdo",
+		"pdo_mysql",
+		"posix",
+		"session",
+		"SimpleXML",
+		"soap",
+		"sockets",
+		"sodium",
+		"standard",
+		"xml",
+		"xmlreader",
+		"xmlwriter",
+		"zlib"
+	],
+
+	"intelephense.files.exclude": [
+		"**/vendor/**",
+		"**/.git/**",
+		"**/node_modules/**"
+	],
+
+	"intelephense.diagnostics.undefinedProperties": false, 
+	"intelephense.diagnostics.undefinedMethods": false,
+
+	"intelephense.completion.triggerParameterHints": true
+    
+}
