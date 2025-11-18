@@ -135,6 +135,15 @@ class Approval extends CI_Controller
 		];
 
 		$this->db->insert("approval_checker", $dataSigner);
+
+		$inputHis = [
+			"id_dok_his" => $id_dok,
+			"id_karyawan" => $id_karyawan,
+			"status_approval" => $status,
+			"tanggal" => tanggal(),
+			"keterangan" => $keterangan,
+		];
+		$this->db->insert("history_pengajuan", $inputHis);
 		if ($this->db->affected_rows() > 0) {
 			$this->session->set_flashdata([
 				"toast_type" => "success",
