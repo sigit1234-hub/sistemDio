@@ -47,7 +47,7 @@
                                      <div class="col-lg-10">
                                          <label class="col-lg-10 col-form-label" for="basic-default-name">:
                                              <?= tanggal_jam(
-                                             	$dd["tanggal_input"],
+                                             	$dd["tanggal_input"]
                                              ) ?>
                                          </label>
                                      </div>
@@ -57,7 +57,15 @@
                                      <div class="col-lg-10">
                                          <?php foreach ($dataCatatan as $dc): ?>
                                              <label class="col-lg-10 col-form-label" for="basic-default-name">:
-                                                 <?= $dc["keterangan"] ?>
+                                                 <?= tampilNama(
+                                                 	$dc["id_karyawan"]
+                                                 ) .
+                                                 	"/" .
+                                                 	tanggal_jam(
+                                                 		$dc["tanggal"]
+                                                 	) .
+                                                 	": " .
+                                                 	$dc["keterangan"] ?>
                                              </label>
                                          <?php endforeach; ?>
                                      </div>
@@ -347,7 +355,7 @@
                                                  <span class="meta-label">Tanggal</span>
                                                  <span class="meta-separator">:</span>
                                                  <span class="meta-content"><?= tgl(
-                                                 	$dd["tanggal_input"],
+                                                 	$dd["tanggal_input"]
                                                  ) ?></span>
                                              </div>
                                          </div>
@@ -359,11 +367,11 @@
                                                  <div class="col-md-6 float-end">
                                                      <p></p><br>
                                                      <p class="text-center"><?= tampilDept(
-                                                     	$dd["signer"],
+                                                     	$dd["signer"]
                                                      ) ?></p><br>
                                                      <br>
                                                      <p class="text-center"><?= tampilNama(
-                                                     	$dd["signer"],
+                                                     	$dd["signer"]
                                                      ) ?></p><br>
 
                                                  </div>
@@ -371,11 +379,11 @@
                                                      <div class="col-md-6 ">
                                                          <p class="text-center"><b>PT. Bank Mandiri (Persero), Tbk</b></p>
                                                          <p class="text-center"><?= tampilDept(
-                                                         	$dd["checker"],
+                                                         	$dd["checker"]
                                                          ) ?></p><br>
                                                          <br>
                                                          <p class="text-center"><?= tampilNama(
-                                                         	$dd["checker"],
+                                                         	$dd["checker"]
                                                          ) ?></p><br>
                                                      </div>
                                                  </div>
@@ -389,7 +397,7 @@
                                      <div class="col-sm-12 text-center">
                                          <a href="<?= base_url("Draft/edit/") .
                                          	$dd["id_dokumen"] ?>" type="button"
-                                             class="btn btn-danger center">edit</a>
+                                             class="btn btn-danger center">Edit</a>
                                          <a href="<?= base_url("Draft/hapus/") .
                                          	$dd["id_dokumen"] ?>" type="button"
                                              class="btn btn-primary center">Hapus</a>

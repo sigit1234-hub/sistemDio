@@ -60,7 +60,7 @@ class Approval extends CI_Controller
 		$data["dataDok"] = $this->Tulis_m->dataApproval(
 			"dokumen",
 			$config["per_page"],
-			$data["start"],
+			$data["start"]
 		);
 
 		$this->cPagination();
@@ -121,6 +121,7 @@ class Approval extends CI_Controller
 		$id_karyawan = htmlspecialchars($this->input->post("checker"));
 		$id_dok = htmlspecialchars($this->input->post("id_dok"));
 		$status = htmlspecialchars($this->input->post("statusId"));
+		$signer = htmlspecialchars($this->input->post("signer"));
 		$keterangan = htmlspecialchars($this->input->post("inputKeterangan"));
 
 		$this->db->where("id_dokumen", $id_dok);
@@ -131,28 +132,29 @@ class Approval extends CI_Controller
 			"approval" => $id_karyawan,
 			"status_approval" => $status,
 			"tanggal" => tanggal(),
-			"keterangan" => $keterangan,
+			"keterangan" => $keterangan
 		];
 
 		$this->db->insert("approval_checker", $dataSigner);
-
-		$inputHis = [
-			"id_dok_his" => $id_dok,
-			"id_karyawan" => $id_karyawan,
-			"status_approval" => $status,
-			"tanggal" => tanggal(),
-			"keterangan" => $keterangan,
-		];
-		$this->db->insert("history_pengajuan", $inputHis);
+		if ($status == 3) {
+			$inputHis = [
+				"id_dok_his" => $id_dok,
+				"id_karyawan" => $id_karyawan,
+				"status_approval" => $status,
+				"tanggal" => tanggal(),
+				"keterangan" => $keterangan
+			];
+			$this->db->insert("history_pengajuan", $inputHis);
+		}
 		if ($this->db->affected_rows() > 0) {
 			$this->session->set_flashdata([
 				"toast_type" => "success",
-				"toast_message" => "Data berhasil disimpan.",
+				"toast_message" => "Data berhasil disimpan."
 			]);
 		} else {
 			$this->session->set_flashdata([
 				"toast_type" => "error",
-				"toast_message" => "Gagal menyimpan data.",
+				"toast_message" => "Gagal menyimpan data."
 			]);
 		}
 		redirect("Approval/cekPengajuan");
@@ -177,19 +179,19 @@ class Approval extends CI_Controller
 			"approval" => $id_karyawan,
 			"status_approval" => $status,
 			"tanggal" => tanggal(),
-			"keterangan" => $keterangan,
+			"keterangan" => $keterangan
 		];
 
 		$this->db->insert("approval_signer", $dataSigner);
 		if ($this->db->affected_rows() > 0) {
 			$this->session->set_flashdata([
 				"toast_type" => "success",
-				"toast_message" => "Data berhasil disimpan.",
+				"toast_message" => "Data berhasil disimpan."
 			]);
 		} else {
 			$this->session->set_flashdata([
 				"toast_type" => "error",
-				"toast_message" => "Gagal menyimpan data.",
+				"toast_message" => "Gagal menyimpan data."
 			]);
 		}
 		redirect("Approval");
@@ -208,19 +210,19 @@ class Approval extends CI_Controller
 	public function kirimData($id)
 	{
 		$data = [
-			"status" => "2",
+			"status" => "2"
 		];
 		$this->db->where("id_dokumen", $id);
 		$this->db->update("dokumen", $data);
 		if ($this->db->affected_rows() > 0) {
 			$this->session->set_flashdata([
 				"toast_type" => "success",
-				"toast_message" => "Data berhasil disimpan.",
+				"toast_message" => "Data berhasil disimpan."
 			]);
 		} else {
 			$this->session->set_flashdata([
 				"toast_type" => "error",
-				"toast_message" => "Gagal menyimpan data.",
+				"toast_message" => "Gagal menyimpan data."
 			]);
 		}
 		redirect("Draft");
@@ -228,19 +230,19 @@ class Approval extends CI_Controller
 	public function batal($id)
 	{
 		$data = [
-			"status" => "1",
+			"status" => "1"
 		];
 		$this->db->where("id_dokumen", $id);
 		$this->db->update("dokumen", $data);
 		if ($this->db->affected_rows() > 0) {
 			$this->session->set_flashdata([
 				"toast_type" => "success",
-				"toast_message" => "Data berhasil disimpan.",
+				"toast_message" => "Data berhasil disimpan."
 			]);
 		} else {
 			$this->session->set_flashdata([
 				"toast_type" => "error",
-				"toast_message" => "Gagal menyimpan data.",
+				"toast_message" => "Gagal menyimpan data."
 			]);
 		}
 		redirect("Draft");
@@ -265,7 +267,7 @@ class Approval extends CI_Controller
 		$data["dataDok"] = $this->Tulis_m->cekApproval(
 			"dokumen",
 			$config["per_page"],
-			$data["start"],
+			$data["start"]
 		);
 
 		$this->cPagination();

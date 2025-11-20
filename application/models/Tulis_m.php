@@ -27,7 +27,7 @@ class Tulis_m extends CI_Model
 			"checker" => $checker,
 			"signer" => $approval,
 			"status" => "1",
-			"keterangan" => "",
+			"keterangan" => ""
 		];
 		$this->db->insert("dokumen", $data);
 	}
@@ -62,7 +62,7 @@ class Tulis_m extends CI_Model
 	{
 		$this->db->where(
 			"id_karyawan",
-			$this->session->userdata("id_karyawan"),
+			$this->session->userdata("id_karyawan")
 		);
 		$this->db->where("status", "3");
 		return $this->db
@@ -92,21 +92,10 @@ class Tulis_m extends CI_Model
 	}
 	public function catatan($id)
 	{
-		// $this->db->select("b.*, r.nama_ruangan, u.nama_lengkap");
-		// $this->db->from("booking b");
-		// $this->db->join("ruangan r", "r.id = b.id_ruangan");
-		// $this->db->join("user u", "u.id = b.id_user");
-		// $this->db->where("b.tanggal", $tanggal);
-		// $this->db->order_by("b.jam_mulai", "ASC");
-
-		$this->db->select("*");
-		$this->db->from("dokumen");
-		$this->db->join(
-			"approval_checker",
-			"approval_checker.id_dok = dokumen.id_dokumen",
-		);
-		$this->db->where("dokumen.id_dokumen", $id);
-
-		return $this->db->get()->result_array();
+		$this->db->where("id_dok_his", $id);
+		return $this->db
+			->order_by("tanggal", "DESC")
+			->get("history_pengajuan")
+			->result_array();
 	}
 }

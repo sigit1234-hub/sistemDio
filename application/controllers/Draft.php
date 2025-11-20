@@ -9,6 +9,8 @@ class Draft extends CI_Controller
 		is_logged_in();
 		$this->load->model("Tulis_m");
 		$this->load->database();
+		$this->load->library("pagination");
+		$this->load->library("session");
 	}
 	public function cPagination()
 	{
@@ -61,7 +63,7 @@ class Draft extends CI_Controller
 		$data["dataDok"] = $this->Tulis_m->dataDraft(
 			"dokumen",
 			$config["per_page"],
-			$data["start"],
+			$data["start"]
 		);
 
 		$this->cPagination();
@@ -92,7 +94,7 @@ class Draft extends CI_Controller
 		$data["dataDok"] = $this->Tulis_m->dataPengajuan(
 			"dokumen",
 			$config["per_page"],
-			$data["start"],
+			$data["start"]
 		);
 
 		$this->cPagination();
@@ -122,7 +124,7 @@ class Draft extends CI_Controller
 		$data["dataDok"] = $this->Tulis_m->dataDitolak(
 			"dokumen",
 			$config["per_page"],
-			$data["start"],
+			$data["start"]
 		);
 
 		$this->cPagination();
@@ -186,19 +188,19 @@ class Draft extends CI_Controller
 			"checker" => $checker,
 			"signer" => $approval,
 			"status" => "1",
-			"keterangan" => "",
+			"keterangan" => ""
 		];
 		$this->db->where("id_dokumen", $id);
 		$this->db->update("dokumen", $data);
 		if ($this->db->affected_rows() > 0) {
 			$this->session->set_flashdata([
 				"toast_type" => "success",
-				"toast_message" => "Data berhasil disimpan.",
+				"toast_message" => "Data berhasil disimpan."
 			]);
 		} else {
 			$this->session->set_flashdata([
 				"toast_type" => "error",
-				"toast_message" => "Gagal menyimpan data.",
+				"toast_message" => "Gagal menyimpan data."
 			]);
 		}
 		redirect("Draft");
@@ -221,7 +223,7 @@ class Draft extends CI_Controller
 			"role" => "1",
 			"approval" => $checker,
 			"status_approval" => 1,
-			"keterangan_approval" => "",
+			"keterangan_approval" => ""
 		];
 		$this->db->insert("approval", $dataChekcek);
 
@@ -235,19 +237,19 @@ class Draft extends CI_Controller
 		// $this->db->insert('approval', $dataSigner);
 
 		$data = [
-			"status" => "2",
+			"status" => "2"
 		];
 		$this->db->where("id_dokumen", $id);
 		$this->db->update("dokumen", $data);
 		if ($this->db->affected_rows() > 0) {
 			$this->session->set_flashdata([
 				"toast_type" => "success",
-				"toast_message" => "Data berhasil disimpan.",
+				"toast_message" => "Data berhasil disimpan."
 			]);
 		} else {
 			$this->session->set_flashdata([
 				"toast_type" => "error",
-				"toast_message" => "Gagal menyimpan data.",
+				"toast_message" => "Gagal menyimpan data."
 			]);
 		}
 		redirect("Draft");
@@ -255,19 +257,19 @@ class Draft extends CI_Controller
 	public function batal($id)
 	{
 		$data = [
-			"status" => "1",
+			"status" => "1"
 		];
 		$this->db->where("id_dokumen", $id);
 		$this->db->update("dokumen", $data);
 		if ($this->db->affected_rows() > 0) {
 			$this->session->set_flashdata([
 				"toast_type" => "success",
-				"toast_message" => "Data berhasil disimpan.",
+				"toast_message" => "Data berhasil disimpan."
 			]);
 		} else {
 			$this->session->set_flashdata([
 				"toast_type" => "error",
-				"toast_message" => "Gagal menyimpan data.",
+				"toast_message" => "Gagal menyimpan data."
 			]);
 		}
 		redirect("Draft");
@@ -279,7 +281,7 @@ class Draft extends CI_Controller
 		if ($this->db->affected_rows() > 0) {
 			$this->session->set_flashdata([
 				"toast_type" => "success",
-				"toast_message" => "Data berhasil disimpan.",
+				"toast_message" => "Data berhasil disimpan."
 			]);
 		} else {
 			// Ambil error dari database
@@ -295,7 +297,7 @@ class Draft extends CI_Controller
 
 			$this->session->set_flashdata([
 				"toast_type" => "error",
-				"toast_message" => $error_message,
+				"toast_message" => $error_message
 			]);
 		}
 		redirect("Draft/diTolak");
