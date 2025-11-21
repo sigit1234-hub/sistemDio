@@ -113,39 +113,33 @@ class Approval extends CI_Controller
 		$data["dataDok"] = $this->Tulis_m->tampilDok($id);
 		$this->load->view("template/header", $data);
 		$this->load->view("template/sidebar", $data);
-		$this->load->view("Approval/preview", $data);
+		$this->load->view("Approval/preview_signer", $data);
 		$this->load->view("template/footer", $data);
 	}
 	public function updateData()
 	{
-		$id_karyawan = htmlspecialchars($this->input->post("checker"));
+		$id_karyawan = $this->session->userdata("id_karyawan");
 		$id_dok = htmlspecialchars($this->input->post("id_dok"));
 		$status = htmlspecialchars($this->input->post("statusId"));
 		$signer = htmlspecialchars($this->input->post("signer"));
 		$keterangan = htmlspecialchars($this->input->post("inputKeterangan"));
 
-		$this->db->where("id_dokumen", $id_dok);
-		$this->db->update("dokumen", ["status" => $status]);
-
-		$dataSigner = [
-			"id_dok" => $id_dok,
-			"approval" => $id_karyawan,
+		if ($status == 3) {
+			$this->db->where("id_dokumen", $id_dok);
+			$this->db->update("dokumen", ["status" => $status]);
+		} else {
+			$this->db->where("id_dokumen", $id_dok);
+			$this->db->update("dokumen", ["status" => $status]);
+		}
+		$inputHis = [
+			"id_dok_his" => $id_dok,
+			"id_karyawan" => $id_karyawan,
 			"status_approval" => $status,
 			"tanggal" => tanggal(),
 			"keterangan" => $keterangan
 		];
+		$this->db->insert("history_pengajuan", $inputHis);
 
-		$this->db->insert("approval_checker", $dataSigner);
-		if ($status == 3) {
-			$inputHis = [
-				"id_dok_his" => $id_dok,
-				"id_karyawan" => $id_karyawan,
-				"status_approval" => $status,
-				"tanggal" => tanggal(),
-				"keterangan" => $keterangan
-			];
-			$this->db->insert("history_pengajuan", $inputHis);
-		}
 		if ($this->db->affected_rows() > 0) {
 			$this->session->set_flashdata([
 				"toast_type" => "success",
@@ -161,28 +155,36 @@ class Approval extends CI_Controller
 	}
 	public function updateDatasigner()
 	{
-		$id_karyawan = htmlspecialchars($this->input->post("checker"));
+		$id_karyawan = $this->session->userdata("id_karyawan");
 		$id_dok = htmlspecialchars($this->input->post("id_dok"));
 		$status = htmlspecialchars($this->input->post("statusId"));
+		$signer = htmlspecialchars($this->input->post("signer"));
 		$keterangan = htmlspecialchars($this->input->post("inputKeterangan"));
-
-		if ($status == 3) {
-			$this->db->where("id_dokumen", $id_dok);
-			$this->db->update("dokumen", ["status" => $status]);
-		} else {
-			$this->db->where("id_dokumen", $id_dok);
-			$this->db->update("dokumen", ["status" => 4]);
-		}
 
 		$dataSigner = [
 			"id_dok" => $id_dok,
-			"approval" => $id_karyawan,
+			"id_karyawan" => $id_karyawan,
 			"status_approval" => $status,
 			"tanggal" => tanggal(),
 			"keterangan" => $keterangan
 		];
 
 		$this->db->insert("approval_signer", $dataSigner);
+		if ($status == 3) {
+			$this->db->where("id_dokumen", $id_dok);
+			$this->db->update("dokumen", ["status" => $status]);
+		} else {
+			$this->db->where("id_dokumen", $id_dok);
+			$this->db->update("dokumen", ["status" => 5]);
+		}
+		$inputHis = [
+			"id_dok_his" => $id_dok,
+			"id_karyawan" => $id_karyawan,
+			"status_approval" => $status,
+			"tanggal" => tanggal(),
+			"keterangan" => $keterangan
+		];
+		$this->db->insert("history_pengajuan", $inputHis);
 		if ($this->db->affected_rows() > 0) {
 			$this->session->set_flashdata([
 				"toast_type" => "success",

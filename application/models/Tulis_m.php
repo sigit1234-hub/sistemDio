@@ -74,7 +74,7 @@ class Tulis_m extends CI_Model
 	{
 		$id = $this->session->userdata("id_karyawan");
 		$this->db->where("signer", $id);
-		$this->db->where("status", 1);
+		$this->db->where("status", 4);
 		return $this->db
 			->order_by("id_dokumen", "DESC")
 			->get($table, $limit, $start)
