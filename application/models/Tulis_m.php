@@ -98,4 +98,13 @@ class Tulis_m extends CI_Model
 			->get("history_pengajuan")
 			->result_array();
 	}
+	public function dataSuratKeluar($table, $limit, $start)
+	{
+		$this->db->where("status", 5);
+		$this->db->where(
+			"id_karyawan",
+			$this->session->userdata("id_karyawan"	)
+		);
+		return $this->db->get($table, $limit, $start)->result_array();
+	}
 }

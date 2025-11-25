@@ -117,9 +117,7 @@
                 <li class="menu-item <?php if ($judul == "surat") {
                 	echo "active";
                 } ?>">
-                    <a href="<?= base_url(
-                    	"Approval/surat"
-                    ) ?>" class="menu-link">
+                    <a href="<?= base_url("Draft/surat") ?>" class="menu-link">
                         <div data-i18n="Connections">Surat Keluar</div>
                     </a>
                 </li>
