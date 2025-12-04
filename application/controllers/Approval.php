@@ -154,6 +154,7 @@ class Approval extends CI_Controller
 		$status = htmlspecialchars($this->input->post('statusId'));
 		$signer = htmlspecialchars($this->input->post('signer'));
 		$keterangan = htmlspecialchars($this->input->post('inputKeterangan'));
+		$jenisDok = htmlspecialchars($this->input->post('jenis_dok'));
 
 		$dataSigner = [
 			'id_dok' => $id_dok,
@@ -162,7 +163,6 @@ class Approval extends CI_Controller
 			'tanggal' => tanggal(),
 			'keterangan' => $keterangan
 		];
-
 		$this->db->insert('approval_signer', $dataSigner);
 		if ($status == 3) {
 			$this->db->where('id_dokumen', $id_dok);
@@ -170,6 +170,11 @@ class Approval extends CI_Controller
 		} else {
 			$this->db->where('id_dokumen', $id_dok);
 			$this->db->update('dokumen', ['status' => 5]);
+			if ($jenisDok == 1) {
+				$this->generatKode('ND.', $id_dok);
+			} else {
+				$this->generatKode('IP.', $id_dok);
+			}
 		}
 		$inputHis = [
 			'id_dok_his' => $id_dok,
@@ -271,5 +276,75 @@ class Approval extends CI_Controller
 		$this->load->view('template/sidebar', $data);
 		$this->load->view('Approval/cekPengajuan', $data);
 		$this->load->view('template/footer', $data);
+	}
+	public function surat()
+	{
+		//pagination
+		$config['base_url'] = 'http://localhost/NewSistemDispo/Draft/surat';
+
+		$this->db->from('dokumen');
+		$config['total_rows'] = $this->db->count_all_results(); // ini untuk menghitung semua pencarian terakhir
+
+		$config['per_page'] = 12;
+		$this->pagination->initialize($config);
+		//akhir pagination
+
+		$data['total_rows'] = $config['total_rows'];
+		$data['start'] = $this->uri->segment(3);
+		$data['dataDok'] = $this->Tulis_m->dataSuratKeluar('dokumen', $config['per_page'], $data['start']);
+
+		$this->cPagination();
+
+		$data['title'] = 'Approval';
+		$data['judul'] = 'Dalam Proses';
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar', $data);
+		$this->load->view('Approval/suratKeluar', $data);
+		$this->load->view('template/footer', $data);
+	}
+	public function suratKeluar()
+	{
+		$data['title'] = 'Approval';
+		$data['judul'] = 'Dalam Proses';
+		$id = $this->uri->segment(3);
+		$data['dataDok'] = $this->Tulis_m->tampilDok($id);
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar', $data);
+		$this->load->view('Approval/previewSurat', $data);
+		$this->load->view('template/footer', $data);
+	}
+	public function generatKode($kode, $id)
+	{
+		$prefix = 'ND.';
+		$bulan = date('m');
+		$tahun = date('Y');
+
+		// Contoh prefix untuk pencarian: ND.001/11/2025 → ND.
+		$this->db->select('kode_pengajuan');
+		$this->db->from('dokumen');
+		$this->db->like('kode_pengajuan', $prefix, 'after');
+		$this->db->like('kode_pengajuan', '/' . $bulan . '/' . $tahun); // filter bulan & tahun
+		$this->db->order_by('kode_pengajuan', 'DESC');
+		$this->db->limit(1);
+		$query = $this->db->get();
+
+		if ($query->num_rows() > 0) {
+			// Ambil angka sebelum "/"
+			$lastKode = $query->row()->kode_pengajuan; // contoh: ND.005/11/2025
+			preg_match('/ND\.(\d+)\//', $lastKode, $matches);
+			$lastNumber = (int) $matches[1];
+			$nextNumber = $lastNumber + 1;
+		} else {
+			$nextNumber = 1;
+		}
+
+		// Format angka menjadi 3 digit
+		$number = str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
+
+		// Return format lengkap
+		$hasil = $prefix . $number . '/' . $bulan . '/' . $tahun;
+
+		$this->db->where('id_dokumen', $id);
+		$this->db->update('dokumen', ['kode_pengajuan' => $hasil]);
 	}
 }

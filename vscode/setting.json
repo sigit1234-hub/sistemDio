@@ -1,18 +1,13 @@
 {
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
 	"[php]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
-	"editor.formatOnSave": true,
-
-	"editor.defaultFormatter": "esbenp.prettier-vscode",
-	"[php]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode",
 		"editor.formatOnSave": true
 	},
 
 	"intelephense.environment.includePaths": ["application", "system", "app"],
 	"intelephense.files.associations": ["*.php", "*.module"],
+	"prettier.disableLanguages": ["php"],
 
 	"intelephense.stubs": [
 		"apache",
@@ -49,15 +44,10 @@
 		"zlib"
 	],
 
-	"intelephense.files.exclude": [
-		"**/vendor/**",
-		"**/.git/**",
-		"**/node_modules/**"
-	],
+	"intelephense.files.exclude": ["**/vendor/**", "**/.git/**", "**/node_modules/**"],
 
-	"intelephense.diagnostics.undefinedProperties": false, 
+	"intelephense.diagnostics.undefinedProperties": false,
 	"intelephense.diagnostics.undefinedMethods": false,
 
 	"intelephense.completion.triggerParameterHints": true
-    
 }

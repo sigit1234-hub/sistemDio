@@ -3,9 +3,7 @@
      <!-- Content -->
 
      <div class="container-xxl flex-grow-1 container-p-y">
-         <form method="POST" action="<?= base_url(
-         	"Approval/updateDatasigner"
-         ) ?>">
+         <form method="POST" action="<?= base_url('Approval/updateDatasigner') ?>">
              <?php foreach ($dataDok as $dd): ?>
                  <div class="row">
                      <div class="col-lg-12 mb-4">
@@ -16,7 +14,7 @@
                                      <label class="col-lg-2 col-form-label" for="basic-default-name">Penerima</label>
                                      <div class="col-lg-10">
                                          <label class="col-sm-10 col-form-label" for="basic-default-name">:
-                                             <?= tampilDept($dd["kepada"]) ?>
+                                             <?= tampilDept($dd['kepada']) ?>
                                          </label>
                                      </div>
                                  </div>
@@ -24,21 +22,20 @@
                                      <label class="col-sm-2 col-form-label" for="basic-default-company">Checker</label>
                                      <div class="col-sm-10">
                                          <label class="col-sm-10 col-form-label" for="basic-default-name">:
-                                             <?= tampilNama($dd["checker"]) ?>
+                                             <?= tampilNama($dd['checker']) ?>
                                          </label>
                                          <input type="hidden" name="checker" value="<?= $this->session->userdata(
-                                         	"id_karyawan"
+                                         	'id_karyawan'
                                          ) ?>">
-                                         <input type="hidden" name="id_dok" value="<?= $dd[
-                                         	"id_dokumen"
-                                         ] ?>">
+                                         <input type="hidden" name="jenis_dok" value="<?= $dd['id_jenis_dokumen'] ?>">
+                                         <input type="hidden" name="id_dok" value="<?= $dd['id_dokumen'] ?>">
                                      </div>
                                  </div>
                                  <div class="row mb-3">
                                      <label class="col-sm-2 col-form-label" for="basic-default-company">Approval</label>
                                      <div class="col-sm-10">
                                          <label class="col-sm-10 col-form-label" for="basic-default-name">:
-                                             <?= tampilNama($dd["signer"]) ?>
+                                             <?= tampilNama($dd['signer']) ?>
                                          </label>
                                      </div>
                                  </div>
@@ -46,7 +43,7 @@
                                      <label class="col-lg-2 col-form-label" for="basic-default-company">Perihal</label>
                                      <div class="col-lg-10">
                                          <label class="col-lg-10 col-form-label" for="basic-default-name">:
-                                             <?= $dd["perihal"] ?>
+                                             <?= $dd['perihal'] ?>
                                          </label>
                                      </div>
                                  </div>
@@ -54,9 +51,7 @@
                                      <label class="col-lg-2 col-form-label" for="basic-default-company">Tanggal</label>
                                      <div class="col-lg-10">
                                          <label class="col-lg-10 col-form-label" for="basic-default-name">:
-                                             <?= tanggal_jam(
-                                             	$dd["tanggal_input"]
-                                             ) ?>
+                                             <?= tanggal_jam($dd['tanggal_input']) ?>
                                          </label>
                                      </div>
                                  </div>
@@ -296,12 +291,12 @@
                                          <div class="logo">BRI</div>
                                      </div>
                                      <div class="header-center">
-                                         <h1>PT Bank Rakyat Indonesia (Persero) Tbk.</h1>
+                                         <h1>PT Mandiri (Persero) Tbk.</h1>
                                          <div class="address-info">
                                              <p>Kantor Pusat</p>
                                              <p>Telepon</p>
                                              <p>Facsimile</p>
-                                             <p>Website: <a href="http://www.bri.co.id">http://www.bri.co.id</a>
+                                             <p>Website: <a href="http://www.bri.co.id">http://www.mandiri.co.id</a>
                                              </p>
                                          </div>
                                      </div>
@@ -309,21 +304,17 @@
                                      </div>
                                  </header>
                                  <main>
-                                     <h2 class="nota-dinas"><?php if (
-                                     	$dd["id_jenis_dokumen"] == 1
-                                     ) {
-                                     	echo "NOTA DINAS";
+                                     <h2 class="nota-dinas"><?php if ($dd['id_jenis_dokumen'] == 1) {
+                                     	echo 'NOTA DINAS';
                                      } else {
-                                     	echo "IZIN PRINSIP";
+                                     	echo 'IZIN PRINSIP';
                                      } ?></h2>
 
                                      <div class="metadata">
                                          <div class="meta-row">
                                              <span class="meta-label">Kepada Yth.</span>
                                              <span class="meta-separator">:</span>
-                                             <span class="meta-content"><?= $dd[
-                                             	"kepada"
-                                             ] ?></span>
+                                             <span class="meta-content"><?= $dd['kepada'] ?></span>
                                          </div>
                                          <div class="meta-row">
                                              <span class="meta-label">Dari</span>
@@ -333,9 +324,7 @@
                                          <div class="meta-row">
                                              <span class="meta-label">Perihal</span>
                                              <span class="meta-separator">:</span>
-                                             <span class="meta-content"><?= $dd[
-                                             	"perihal"
-                                             ] ?></span>
+                                             <span class="meta-content"><?= $dd['perihal'] ?></span>
                                          </div>
                                          <div class="meta-row">
                                              <span class="meta-label">Lampiran</span>
@@ -345,39 +334,29 @@
                                          <div class="meta-row">
                                              <span class="meta-label">Tanggal</span>
                                              <span class="meta-separator">:</span>
-                                             <span class="meta-content"><?= tgl(
-                                             	$dd["tanggal_input"]
-                                             ) ?></span>
+                                             <span class="meta-content"><?= tgl($dd['tanggal_input']) ?></span>
                                          </div>
                                      </div>
 
                                      <div class="content-body mb-5">
-                                         <p><?= $dd["isi_dokumen"] ?></p>
+                                         <p><?= $dd['isi_dokumen'] ?></p>
                                      </div>
 
                                      <div class="content-body mt-5">
                                          <div class="row">
                                              <div class="col-md-6 float-end">
                                                  <p></p><br>
-                                                 <p class="text-center"><?= tampilDept(
-                                                 	$dd["signer"]
-                                                 ) ?></p><br>
+                                                 <p class="text-center"><?= tampilDept($dd['signer']) ?></p><br>
                                                  <br>
-                                                 <p class="text-center"><?= tampilNama(
-                                                 	$dd["signer"]
-                                                 ) ?></p><br>
+                                                 <p class="text-center"><?= tampilNama($dd['signer']) ?></p><br>
 
                                              </div>
                                              <div class="col-md-6 float-end">
                                                  <div class="col-md-6">
                                                      <p class="text-center"><b>PT. Bank Mandiri (Persero), Tbk</b></p>
-                                                     <p class="text-center"><?= tampilDept(
-                                                     	$dd["checker"]
-                                                     ) ?></p><br>
+                                                     <p class="text-center"><?= tampilDept($dd['checker']) ?></p><br>
                                                      <br>
-                                                     <p class="text-center"><?= tampilNama(
-                                                     	$dd["checker"]
-                                                     ) ?></p><br>
+                                                     <p class="text-center"><?= tampilNama($dd['checker']) ?></p><br>
                                                  </div>
                                              </div>
                                          </div>
